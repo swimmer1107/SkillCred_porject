@@ -1,14 +1,6 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 const getComprehensivePrompt = (syllabusInput: string, citationStyle: string) => `
 You are an academic content generator that uses a multi-step pipeline to transform a syllabus outline or topic keywords into a structured, human-like learning guide.
 
@@ -66,7 +58,17 @@ ${syllabusInput}
 Now, execute your pipeline and generate the complete exam study notes in Markdown format. Use '#' for the main title, '##' for section headings, '*' for bullet points, and '**' for bold text.
 `;
 
-export async function generateLearningGuide(syllabusInput: string, citationStyle: string, contentStyle: string): Promise<string> {
+export async function generateLearningGuide(
+    syllabusInput: string, 
+    citationStyle: string, 
+    contentStyle: string, 
+    apiKey: string
+): Promise<string> {
+    if (!apiKey) {
+        throw new Error("API Key is missing.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     const model = 'gemini-2.5-flash';
 
     const prompt = contentStyle === 'Exam Study Notes'
