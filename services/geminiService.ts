@@ -61,11 +61,11 @@ Now, execute your pipeline and generate the complete exam study notes in Markdow
 export async function generateLearningGuide(
     syllabusInput: string, 
     citationStyle: string, 
-    contentStyle: string, 
-    apiKey: string
+    contentStyle: string
 ): Promise<string> {
+    const apiKey = process.env.API_KEY;
     if (!apiKey) {
-        throw new Error("API Key is missing.");
+        throw new Error("API Key is not configured. Please set the API_KEY environment variable.");
     }
 
     const ai = new GoogleGenAI({ apiKey });
@@ -83,6 +83,6 @@ export async function generateLearningGuide(
         return response.text;
     } catch (error) {
         console.error("Error calling Gemini API:", error);
-        throw new Error("Failed to generate content from Gemini API.");
+        throw new Error("The AI service failed to generate content. This could be due to an invalid API key, network issues, or a problem with the service itself.");
     }
 }
