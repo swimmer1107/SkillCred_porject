@@ -63,9 +63,13 @@ export async function generateLearningGuide(
     citationStyle: string, 
     contentStyle: string
 ): Promise<string> {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-        throw new Error("API Key is not configured. Please set the API_KEY environment variable.");
+    // --- Add your API key here ---
+    // IMPORTANT: Replace "YOUR_API_KEY_HERE" with your actual Google Gemini API key.
+    // Note: Exposing an API key in client-side code is a security risk.
+    const apiKey = "AIzaSyDx4FjGSRP0RhDBdnl-Al97Q0OKSwMZ_a8";
+
+    if (apiKey === "AIzaSyDx4FjGSRP0RhDBdnl-Al97Q0OKSwMZ_a8" || !apiKey) {
+        throw new Error("Please replace 'YOUR_API_KEY_HERE' with your actual Google Gemini API key in services/geminiService.ts");
     }
 
     const ai = new GoogleGenAI({ apiKey });
