@@ -1,0 +1,5 @@
+{
+  "name": "Academic Guide Generator",
+  "description": "An AI-powered tool that transforms a syllabus or topic keywords into a structured, student-friendly learning guide, complete with explanations, examples, and references.",
+  "requestFramePermissions": []
+}
